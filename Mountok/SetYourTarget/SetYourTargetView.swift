@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct SetYourTargetView: View {
     @State var text: String = ""
     @State private var selectedDate: Date = Date()
     @State private var mountain: Mountain?
@@ -102,5 +102,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    SetYourTargetView()
 }

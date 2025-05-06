@@ -19,11 +19,6 @@ struct Province: Identifiable {
     let mountains: Array<Mountain>
 }
 
-struct Fruit: Identifiable {
-    let id = UUID()
-    let name: String
-}
-
 struct MountainListView: View {
     var onSelected: ((Mountain) -> Void)
     let datum: Array<Province> = [
