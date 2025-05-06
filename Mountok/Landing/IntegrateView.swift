@@ -8,6 +8,15 @@
 import SwiftUI
 
 struct IntegrateView: View {
+    let backgroundGradient = LinearGradient(
+        colors: [
+            Color("Colors/BackgroundGradientStart"),
+            Color("Colors/BackgroundGradientEnd")
+        ],
+        startPoint: .top,
+        endPoint: .bottom
+    )
+    
     var body: some View {
         VStack(alignment: .leading) {
             Image("Icons/HealthApp")
@@ -36,7 +45,10 @@ struct IntegrateView: View {
             }
             .padding()
             .padding(.top, 0)
+            .foregroundStyle(.white)
         }
+        .padding(.bottom)
+        .background(backgroundGradient)
     }
 }
 

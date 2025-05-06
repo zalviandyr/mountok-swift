@@ -8,11 +8,20 @@
 import SwiftUI
 
 struct LandingView: View {
+    let backgroundGradient = LinearGradient(
+        colors: [
+            Color("Colors/BackgroundGradientStart"),
+            Color("Colors/BackgroundGradientEnd")
+        ],
+        startPoint: .top,
+        endPoint: .bottom
+    )
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text("Mountok")
                 .padding(.bottom)
-                .font(.title)
+                .font(.largeTitle)
             
             Text("It is an application that estimates your ability to complete a same-day round trip hike (tektok) on a specific mountain, with the assessment based on the VO2max you possess. VO2max refers to the maximum amount of oxygen your body can utilize during intense exercise, and it is a key indicator of your cardiovascular fitness and endurance capacity.")
             
@@ -32,6 +41,9 @@ struct LandingView: View {
 
         }
         .padding()
+        .padding(.bottom)
+        .foregroundStyle(.white)
+        .background(backgroundGradient)
     }
 }
 
