@@ -39,6 +39,10 @@ struct ExerciseTabView: View {
                     
                     ZStack {
                         Circle()
+                            .fill(.ultraThinMaterial)
+                            .padding(.all, 3)
+                        
+                        Circle()
                             .rotation(.degrees(270))
                             .stroke(lineWidth: 8)
                             .fill(.gray)
@@ -52,6 +56,7 @@ struct ExerciseTabView: View {
                             .fill(.blue)
                         
                         Text("35.4")
+                            .fontWeight(.bold)
                     }
                     .frame(width: 60, height: 60)
                 }
@@ -63,9 +68,10 @@ struct ExerciseTabView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                 )
-                .frame(width: .infinity, height: 170)
+                .frame(height: 170)
                 .cornerRadius(10)
                 .padding(.bottom)
+                .shadow(radius: 5)
                 
                 // today activity
                 Text("Today Activity")
@@ -78,7 +84,7 @@ struct ExerciseTabView: View {
                         Text("ccc")
                     }
                 }
-                .frame(width: .infinity, height: 100)
+                .frame(height: 100)
                 .background(.white)
                 .cornerRadius(10)
                 
@@ -93,7 +99,7 @@ struct ExerciseTabView: View {
                         Text("ccc")
                     }
                 }
-                .frame(width: .infinity, height: 100)
+                .frame(height: 100)
                 .background(.white)
                 .cornerRadius(10)
                 

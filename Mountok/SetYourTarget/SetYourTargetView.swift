@@ -8,15 +8,11 @@
 import SwiftUI
 
 struct SetYourTargetView: View {
-    @State var text: String = ""
+    @State private var text: String = ""
     @State private var selectedDate: Date = Date()
     @State private var mountain: Mountain?
     @State private var isShowMountainSheet = false
-
-    let options = ["Apple", "Banana", "Orange", "Strawberry", "Grape", "Pineapple"]
-    
     @State private var selectedDetent: PresentationDetent = .height(100)
-
     
     var body: some View {
         NavigationView {
@@ -70,11 +66,6 @@ struct SetYourTargetView: View {
                 .cornerRadius(12)
                 .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 4)
                 
-                Text("*The date you are choosing is not reccomended, Please refer to Guidelines")
-                    .font(.caption)
-                    .foregroundStyle(.red)
-                    .padding(.top)
-                
                 
                 Spacer()
                 
@@ -87,8 +78,12 @@ struct SetYourTargetView: View {
                 .padding(.bottom)
                 .font(.caption)
                 
-                Button("Start") {}
-                    .buttonStyle(.bordered)
+                NavigationLink {
+                    DashboardView()
+                } label: {
+                    Text("Start")
+                }
+                .buttonStyle(.bordered)
             }
             .padding()
             .sheet(isPresented: $isShowMountainSheet) {
@@ -98,6 +93,7 @@ struct SetYourTargetView: View {
                 }
             }
         }
+        .navigationBarBackButtonHidden()
     }
 }
 
