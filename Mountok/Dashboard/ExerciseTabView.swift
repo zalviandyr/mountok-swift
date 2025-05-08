@@ -66,6 +66,7 @@ struct ExerciseTabView: View {
                 .frame(width: .infinity, height: 170)
                 .cornerRadius(10)
                 .padding(.bottom)
+                .shadow(radius: 5)
                 
                 // today activity
                 Text("Today Activity")

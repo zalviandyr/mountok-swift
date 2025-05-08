@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PrepareView: View {
     var body: some View {
+        NavigationView {
             VStack {
                 Spacer()
                 
@@ -22,8 +23,8 @@ struct PrepareView: View {
                 Text("mountains based on your VO2max calculation.\"")
                     .font(.caption)
                 
-                Button {
-                    print("continue")
+                NavigationLink {
+                    IntegrateView()
                 } label: {
                     Text("Get Started")
                         .frame(maxWidth: .infinity)
@@ -41,6 +42,7 @@ struct PrepareView: View {
                 Image("Images/Mountain")
             )
             .padding(.bottom)
+        }
     }
 }
 
