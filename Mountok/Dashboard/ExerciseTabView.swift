@@ -146,6 +146,13 @@ struct ExerciseTabView: View {
                     }.padding()
                         .navigationTitle("About VO2Max")
                         .navigationBarTitleDisplayMode(.inline)
+                        .toolbar {
+                            ToolbarItem(placement: .navigationBarLeading) {
+                                Button("Back") {
+                                    self.sheetPresented.toggle()
+                                }
+                            }
+                        }
                 }
                 
 .presentationDragIndicator(.visible)
