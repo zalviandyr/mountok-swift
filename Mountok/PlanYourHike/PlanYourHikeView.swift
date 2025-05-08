@@ -12,6 +12,7 @@ struct SetYourTargetView: View {
     @State private var selectedDate: Date = Date()
     @State private var selectedMountain: Mountain?
     @State private var isShowMountainSheet = false
+    @State private var isShowGuidelineSheet = false
     private let calendar = Calendar.current
     
     func getVo2Mountain() -> String {
@@ -67,7 +68,7 @@ struct SetYourTargetView: View {
     var body: some View {
         NavigationView {
             VStack {
-                Text("Set your target")
+                Text("Plan Your Hike")
                     .font(.title)
                     .padding()
                 
@@ -85,7 +86,7 @@ struct SetYourTargetView: View {
                         Text("Mountain")
                         Spacer()
                         Button(selectedMountain == nil ? "Pick a mountain" : selectedMountain!.name ) {
-                            isShowMountainSheet = true
+                            self.isShowMountainSheet.toggle()
                         }
                         .buttonStyle(.bordered)
                     }
@@ -122,7 +123,7 @@ struct SetYourTargetView: View {
                 VStack{
                     Text("Please consider to read our")
                     Button("Guidelines") {
-                        
+                        self.isShowGuidelineSheet.toggle()
                     }
                 }
                 .padding(.bottom)
@@ -131,19 +132,60 @@ struct SetYourTargetView: View {
                 NavigationLink {
                     DashboardView()
                 } label: {
-                    Text("Start")
+                    Text("Save")
+                        .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.bordered)
             }
             .padding()
-            .sheet(isPresented: $isShowMountainSheet) {
+        }
+        .navigationBarBackButtonHidden()
+        .sheet(isPresented: $isShowMountainSheet) {
+            NavigationStack {
                 MountainListView { mountain in
                     isShowMountainSheet = false
                     selectedMountain = mountain
                 }
+                .navigationTitle("Indonesian Mountains")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button("Back") {
+                            self.isShowMountainSheet.toggle()
+                        }
+                    }
+                }
             }
         }
-        .navigationBarBackButtonHidden()
+        .sheet(isPresented: $isShowGuidelineSheet) {
+            NavigationStack {
+                VStack {
+                    Text("""
+                        The reccomended duration is 2 months program of physical excercise, We recommend you to adjust your plan
+
+                        We offer 2 months of physical preparation reccomendation which consist of:
+
+                        - 1 Month of Exercise to adapt to cardiovascular change
+                        - 1 Month of High Intensity Interval Training to Increase your VO2Max significanly
+                        """)
+                    
+                    Spacer()
+                }
+                .padding()
+                .presentationDetents(.init([.medium]))
+                .navigationTitle("Guideline")
+                .navigationBarTitleDisplayMode(.inline)
+                .presentationDragIndicator(.visible)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button("Back") {
+                            self.isShowGuidelineSheet.toggle()
+                        }
+                    }
+                }
+            }
+            
+        }
     }
 }
 
