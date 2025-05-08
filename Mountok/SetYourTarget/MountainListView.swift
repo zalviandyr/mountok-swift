@@ -35,17 +35,8 @@ struct MountainListView: View {
             ]
         ),
         Province(
-            name: "South Sumatra",
-            mountains: [
-                Mountain(name: "Mount Dempo", elevation: 3173),
-            ]
-        ),
-        Province(
             name: "Aceh",
             mountains: [
-                Mountain(name: "Mount Bandahara", elevation: 3030),
-                Mountain(name: "Mount Kurik", elevation: 3085),
-                Mountain(name: "Mount Mugajah", elevation: 3079),
                 Mountain(name: "Mount Burni Telong", elevation: 2600),
                 Mountain(name: "Mount Geureudong", elevation: 2885),
                 Mountain(name: "Mount Bateekeubeu", elevation: 2756),
@@ -61,7 +52,6 @@ struct MountainListView: View {
             name: "East Jawa",
             mountains: [
                 Mountain(name: "Mount Bromo", elevation: 2329),
-                Mountain(name: "Mount Argopuro", elevation: 3088),
                 Mountain(name: "Mount Anjasmoro", elevation: 2277),
                 Mountain(name: "Mount Argowayang", elevation: 2162),
                 Mountain(name: "Mount Baluran", elevation: 1247),
@@ -72,7 +62,6 @@ struct MountainListView: View {
         Province(
             name: "West Jawa",
             mountains: [
-                Mountain(name: "Mount Ciremai", elevation: 3078),
                 Mountain(name: "Mount Papandayan", elevation: 2665),
                 Mountain(name: "Mount Galunggung", elevation: 2240),
                 Mountain(name: "Mount Tangkuban Perahu", elevation: 2084),
