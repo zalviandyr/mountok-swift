@@ -135,7 +135,7 @@ struct MountainListView: View {
 
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 ForEach(filteredProvinces, id: \.self.id) { province in
                     Section(header: Text(province.name)) {
@@ -149,6 +149,7 @@ struct MountainListView: View {
                                     Spacer()
                                     Text("\(mountain.elevation) mdpl")
                                 }
+                                .foregroundStyle(.black)
                             }
                         }
                     }
