@@ -160,6 +160,7 @@ struct MountainListView: View {
                                     Spacer()
                                     Text("\(mountain.elevation) mdpl")
                                 }
+                                .foregroundStyle(.black)
                             }
                         }
                     }
