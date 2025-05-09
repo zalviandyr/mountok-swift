@@ -33,7 +33,7 @@ struct IntegrateView: View {
                     Spacer()
                     
                     NavigationLink {
-                        SetYourTargetView()
+                        PlanYourHikeView()
                     } label: {
                         Text("Sync Health Data")
                             .frame(maxWidth: .infinity)

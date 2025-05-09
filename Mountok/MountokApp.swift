@@ -9,6 +9,11 @@ import SwiftUI
 
 @main
 struct MountokApp: App {
+    init() {
+        // force to light mode
+        UIView.appearance().overrideUserInterfaceStyle = .light
+    }
+    
     var body: some Scene {
         WindowGroup {
             PrepareView()

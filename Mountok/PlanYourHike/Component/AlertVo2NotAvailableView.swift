@@ -18,7 +18,7 @@ struct AlertVo2NotAvailableView: View {
                 
                 VStack(alignment: .leading, spacing: 5) {
                     Text("Your VO2Max is not available")
-                        .font(.subheadline)
+                        .font(.footnote)
                         .fontWeight(.bold)
                     
                     Text("Please do an aerobic exercise, such as cycling, outdoor run, and hiking at least 15 minutes")

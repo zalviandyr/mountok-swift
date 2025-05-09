@@ -23,7 +23,7 @@ struct AlertVo2NotFeasibleView: View {
                 
                 VStack(alignment: .leading, spacing: 5) {
                     Text("\(mountain.name) require VO2Max at \(vo2Label)")
-                        .font(.subheadline)
+                        .font(.footnote)
                         .fontWeight(.bold)
                     
                     Text("Our recomendation to adjust your departure date to further date or change the mountain")

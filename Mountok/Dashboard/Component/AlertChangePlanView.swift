@@ -18,7 +18,7 @@ struct AlertChangePlanView: View {
                 
                 VStack(alignment: .leading, spacing: 5) {
                     Text("Mt. Prau require VO2Max at 50 ml/min/kg")
-                        .font(.subheadline)
+                        .font(.footnote)
                         .fontWeight(.bold)
                     
                     Text("Our recomendation to adjust your departure date to further date or change the mountain")

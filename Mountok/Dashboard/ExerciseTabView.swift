@@ -182,12 +182,15 @@ struct ExerciseTabView: View {
                 }
                 .frame(height: 120)
                 
+                Divider()
+                    .padding(.vertical, 20)
+                    .padding(.horizontal, -2)
+                
                 Text("You can change your target by hit the button below, to change the Mountain or Depart Date.")
                     .font(.caption)
-                    .padding(.top)
                 
-                Button {
-                    
+                NavigationLink {
+                    PlanYourHikeView()
                 } label: {
                     Text("Change your plan")
                         .frame(maxWidth: .infinity)

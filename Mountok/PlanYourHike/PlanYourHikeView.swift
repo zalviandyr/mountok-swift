@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SetYourTargetView: View {
+struct PlanYourHikeView: View {
     @State private var selectedDate: Date = Date()
     @State private var selectedMountain: Mountain?
     @State private var isShowMountainSheet = false
@@ -240,5 +240,5 @@ struct SetYourTargetView: View {
 }
 
 #Preview {
-    SetYourTargetView()
+    PlanYourHikeView()
 }

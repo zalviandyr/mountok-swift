@@ -23,7 +23,7 @@ struct DashboardView: View {
                         .background(.white)
                 }
             
-            ProfileView()
+            ScheduleView()
                 .tabItem {
                     Label("Schedule", systemImage: "calendar.circle")
                 }
