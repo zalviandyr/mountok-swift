@@ -10,12 +10,10 @@ import SwiftUI
 struct Exercise: Identifiable{
     let id: UUID = UUID()
     let date: String
-    let exerciseName: String
-    let exerciseDescription: String
-    let exerciseTime: String
+    let name: String
+    let description: String
+    let time: String
 }
-
-
 
 struct Week: Identifiable {
     let id: UUID = UUID()
@@ -45,39 +43,80 @@ struct ScheduleView: View {
             exercises: [
                 Exercise(
                     date: "06 May 2025",
-                    exerciseName: "Jogging",
-                    exerciseDescription: "Jogging berjalan",
-                    exerciseTime: "10 minute"),
+                    name: "Jogging",
+                    description: "Jogging berjalan",
+                    time: "10 minute"),
                 Exercise(
                     date: "07 May 2025",
-                    exerciseName: "Jogging",
-                    exerciseDescription: "Jogging berjalan",
-                    exerciseTime: "10 minute"),
+                    name: "Jogging",
+                    description: "Jogging berjalan",
+                    time: "10 minute"),
                 Exercise(
                     date: "08 May 2025",
-                    exerciseName: "Jogging",
-                    exerciseDescription: "Jogging berjalan",
-                    exerciseTime: "10 minute"),
+                    name: "Jogging",
+                    description: "Jogging berjalan",
+                    time: "10 minute"),
                 Exercise(
                     date: "09 May 2025",
-                    exerciseName: "Jogging",
-                    exerciseDescription: "Jogging berjalan",
-                    exerciseTime: "10 minute"),
+                    name: "Jogging",
+                    description: "Jogging berjalan",
+                    time: "10 minute"),
                 Exercise(
                     date: "10 May 2025",
-                    exerciseName: "Jogging",
-                    exerciseDescription: "Jogging berjalan",
-                    exerciseTime: "10 minute"),
+                    name: "Jogging",
+                    description: "Jogging berjalan",
+                    time: "10 minute"),
                 Exercise(
                     date: "11 May 2025",
-                    exerciseName: "Jogging",
-                    exerciseDescription: "Jogging berjalan",
-                    exerciseTime: "10 minute"),
+                    name: "Jogging",
+                    description: "Jogging berjalan",
+                    time: "10 minute"),
                 Exercise(
                     date: "12 May 2025",
-                    exerciseName: "Jogging",
-                    exerciseDescription: "Jogging berjalan",
-                    exerciseTime: "10 minute")
+                    name: "Jogging",
+                    description: "Jogging berjalan",
+                    time: "10 minute")
+            ]
+        ),
+        
+        Week(
+            week: "Week 2",
+            exercises: [
+                Exercise(
+                    date: "06 May 2025",
+                    name: "Jogging",
+                    description: "Jogging berjalan",
+                    time: "10 minute"),
+                Exercise(
+                    date: "07 May 2025",
+                    name: "Jogging",
+                    description: "Jogging berjalan",
+                    time: "10 minute"),
+                Exercise(
+                    date: "08 May 2025",
+                    name: "Jogging",
+                    description: "Jogging berjalan",
+                    time: "10 minute"),
+                Exercise(
+                    date: "09 May 2025",
+                    name: "Jogging",
+                    description: "Jogging berjalan",
+                    time: "10 minute"),
+                Exercise(
+                    date: "10 May 2025",
+                    name: "Jogging",
+                    description: "Jogging berjalan",
+                    time: "10 minute"),
+                Exercise(
+                    date: "11 May 2025",
+                    name: "Jogging",
+                    description: "Jogging berjalan",
+                    time: "10 minute"),
+                Exercise(
+                    date: "12 May 2025",
+                    name: "Jogging",
+                    description: "Jogging berjalan",
+                    time: "10 minute")
             ]
         ),
 
@@ -90,18 +129,23 @@ struct ScheduleView: View {
                 ForEach(datum , id: \.self.id){ week in
                     Section(header: Text(week.week)){
                         ForEach(week.exercises, id: \.self.id ){ exercise in
-                            HStack{
+                            HStack {
+                                Image(systemName: "figure.run")
+                                    .resizable()
+                                    .frame(width: 15, height: 20)
+                                    .padding(.trailing, 5)
+                                
                                 VStack(alignment: .leading){
                                     Text(exercise.date)
-                                        .font(.title3)
-                                    HStack{
-                                        Text("\(exercise.exerciseName) - \(exercise.exerciseTime)")
-                                            .foregroundColor(.gray)
-                                        
-                                    }
+                                        .font(.headline)
+                                    
+                                    Text("\(exercise.name) - \(exercise.time)")
+                                        .font(.subheadline)
+                                        .foregroundColor(.gray)
                                 }
                                 
                                 Spacer()
+                                
                                 if exercise.date == todayString {
                                     Image(systemName: "checkmark")
                                         .foregroundColor(.green)
