@@ -9,6 +9,7 @@ import SwiftUI
 
 struct IntegrateView: View {
     var body: some View {
+    NavigationView {
         ZStack {
             Color(.systemGray5).ignoresSafeArea()
             VStack {
@@ -33,7 +34,8 @@ struct IntegrateView: View {
                             .fixedSize(horizontal: false, vertical: true)
                             .font(.caption)
                             .padding([.leading, .bottom, .trailing])
-                        Button {
+                        NavigationLink {
+                            SetYourTargetView()
                             // Action
                         } label: {
                             HStack {
@@ -57,6 +59,8 @@ struct IntegrateView: View {
                 }
             }.padding()
         }
+        }
+ 
         
     }
 }
