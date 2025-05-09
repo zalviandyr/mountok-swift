@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ExerciseTabView: View {
+    @State var sheetPresented = false
     private let backgroundGradient = LinearGradient(
         colors: [
             Color("Colors/BackgroundGradientStart"),
@@ -16,6 +17,9 @@ struct ExerciseTabView: View {
         startPoint: .top,
         endPoint: .bottom
     )
+    var VO2maxDescription: String {
+        "This is a measurement of your VO, max, which is the maximum amount of oxygen your body can consume during exercise, Also called cardiorespiratory fitness, this is a useful measurement for everyone from the very fit to those managing illness.\n\nA higher VO2 max indicates a higher level of cardio fitness and endurance.\n\nMeasuring VO2 max requires a physical test and special equipment. You can also get an estimated VO2 max with heart rate and motion data from a fitness tracker. Apple Watch can record an estimated VO max when you do a brisk walk, hike, or run outdoors.\n\nVO2 max is validated for users 20 and older. Most people can improve their VO2 max with more intense and more frequent cardiovascular exercise. Certainconditions or medications that limit your heart rate may cause an overestimation of your VO, max. VO, max is not validated for pregnant users. You can indicate you're taking certain medications or add a current pregnancy in Health Details."
+    }
     
     var body: some View {
         ScrollView {
@@ -200,16 +204,41 @@ struct ExerciseTabView: View {
                     Text("Last sync of VO2Max is 29 April 2026 at 11.05 PM")
                     Button("learn more about VO2Max") {
                         // Aksi ketika diklik
-                        print("Learn more tapped")
+                        sheetPresented=true
                     }
                     .foregroundColor(.blue)
                 }
                 .font(.caption)
                 .foregroundStyle(.white)
             }
+            .sheet(isPresented: $sheetPresented){
+                NavigationStack {
+                    HStack(alignment: .top){
+                        VStack(alignment: .leading){
+                            Text("VO2Max")
+                                .font(.title)
+                                .fontWeight(.bold)
+                            Text(VO2maxDescription)
+                 }
+                    }.padding()
+                        .navigationTitle("About VO2Max")
+                        .navigationBarTitleDisplayMode(.inline)
+                        .toolbar {
+                            ToolbarItem(placement: .navigationBarLeading) {
+                                Button("Back") {
+                                    self.sheetPresented.toggle()
+                                }
+                            }
+                        }
+                }
+                
+.presentationDragIndicator(.visible)
+                    
+            }
             .padding()
         }
         .background(backgroundGradient)
+
     }
 }
 
