@@ -79,12 +79,35 @@ struct ExerciseTabView: View {
                     .fontWeight(.bold)
                     .foregroundStyle(.white)
                 
-                VStack {
-                    HStack {
-                        Text("ccc")
+                HStack(alignment: .top) {
+                    VStack(alignment: .leading, spacing: 0) {
+                        Text("Jumping Rope")
+                            .font(.headline)
+                            .padding(.bottom, 5)
+                        
+                        HStack(spacing: 5) {
+                            Image(systemName: "timer")
+                                .resizable()
+                                .frame(width: 12, height: 12)
+                            
+                            Text("30 Minutes")
+                                .font(.caption)
+                        }
+                        
+                        Spacer()
+                        
+                        Text("Jumping rope is an effective workout that can increase your cardiorespiratory")
+                            .font(.footnote)
                     }
+                    
+                    Spacer()
+                    
+                    Image("Icons/JumpingRope")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
                 }
-                .frame(height: 100)
+                .padding()
+                .frame(height: 120)
                 .background(.white)
                 .cornerRadius(10)
                 
@@ -94,14 +117,68 @@ struct ExerciseTabView: View {
                     .fontWeight(.bold)
                     .foregroundStyle(.white)
                 
-                VStack {
-                    HStack {
-                        Text("ccc")
+                HStack(spacing: 10) {
+                    VStack(alignment: .leading, spacing: 0) {
+                        Text("Jumping Rope")
+                            .font(.subheadline)
+                            .fontWeight(.bold)
+                            .padding(.bottom, 5)
+                        
+                        HStack(spacing: 5) {
+                            Image(systemName: "timer")
+                                .resizable()
+                                .frame(width: 10, height: 10)
+                            
+                            Text("30 Minutes")
+                                .font(.caption2)
+                        }
+                        
+                        HStack(alignment: .bottom) {
+                            Text("Tomorrow")
+                                .font(.footnote)
+                            
+                            Spacer()
+                            
+                            Image("Icons/Cycling")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                        }
+                    }
+                    .padding(.all, 10)
+                    .background(.white)
+                    .cornerRadius(10)
+                    
+                    VStack(spacing: 10) {
+                        VStack(alignment: .leading, spacing: 5) {
+                            Text("Jogging")
+                                .font(.subheadline)
+                                .fontWeight(.bold)
+                            
+                            Text("25 April 2025")
+                                .font(.caption2)
+                        }
+                        .padding(.all, 5)
+                        .padding(.horizontal, 6)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                        .background(.white)
+                        .cornerRadius(10)
+                        
+                        VStack(alignment: .leading, spacing: 5) {
+                            Text("Jogging")
+                                .font(.subheadline)
+                                .fontWeight(.bold)
+                            
+                            Text("25 April 2025")
+                                .font(.caption2)
+                        }
+                        .padding(.all, 5)
+                        .padding(.horizontal, 6)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                        .background(.white)
+                        .cornerRadius(10)
                     }
                 }
-                .frame(height: 100)
-                .background(.white)
-                .cornerRadius(10)
+                .frame(height: 120)
                 
                 Text("You can change your target by hit the button below, to change the Mountain or Depart Date.")
                     .font(.caption)
