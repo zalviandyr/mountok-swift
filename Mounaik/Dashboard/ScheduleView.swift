@@ -37,6 +37,8 @@ func getTodayString() -> String {
 
 
 struct ScheduleView: View {
+    @Binding var path: NavigationPath
+
     let datum: Array<Week> = [
         Week(
             week: "Week 1",
@@ -161,5 +163,9 @@ struct ScheduleView: View {
 }
 
 #Preview {
-    ScheduleView()
+    @Previewable @State var path: NavigationPath = .init()
+
+    ScheduleView(
+        path: $path
+    )
 }

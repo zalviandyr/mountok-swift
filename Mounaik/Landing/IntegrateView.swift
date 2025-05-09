@@ -9,6 +9,8 @@ import SwiftUI
 import HealthKit
 
 struct IntegrateView: View {
+    @Binding var path: NavigationPath
+
     func requestPermission() {
         let healthStore: HKHealthStore = .init()
         let vo2Type = HKObjectType.quantityType(forIdentifier: .vo2Max)!
@@ -20,10 +22,12 @@ struct IntegrateView: View {
         
         // check permission
         healthStore.requestAuthorization(toShare: [], read: [vo2Type]) { success, error in
-            // just do nothing
+            if success {
+                path.append(AppScreen.plan)
+            } else {
+                // just do nothing
+            }
         }
-        
-        // navigate to plan your hike
     }
     
     var body: some View {
@@ -57,8 +61,8 @@ struct IntegrateView: View {
                             .font(.caption)
                             .padding([.leading, .bottom, .trailing])
                         
-                        NavigationLink {
-                            PlanYourHikeView()
+                        Button {
+                            requestPermission()
                         } label: {
                             HStack {
                                 Image(systemName: "applewatch")
@@ -71,22 +75,6 @@ struct IntegrateView: View {
                             .cornerRadius(10)
                             .padding([.leading, .bottom, .trailing])
                         }
-                        
-                        
-                        //                        Button {
-                        //                            requestPermission()
-                        //                        } label: {
-                        //                            HStack {
-                        //                                Image(systemName: "applewatch")
-                        //                                Text("Sync Health Data")
-                        //                            }
-                        //                            .padding()
-                        //                            .frame(maxWidth: .infinity)
-                        //                            .background(Color.blue)
-                        //                            .foregroundColor(.white)
-                        //                            .cornerRadius(10)
-                        //                            .padding([.leading, .bottom, .trailing])
-                        //                        }
                     }
                     .background(.white)
                     .cornerRadius(10)
@@ -103,5 +91,9 @@ struct IntegrateView: View {
 }
 
 #Preview {
-    IntegrateView()
+    @Previewable @State var path: NavigationPath = .init()
+
+    IntegrateView(
+        path: $path
+    )
 }

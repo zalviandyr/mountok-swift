@@ -7,8 +7,14 @@
 
 import SwiftUI
 
+enum AppScreen: Hashable {
+    case integrate, plan, dashboard
+}
+
 @main
 struct MounaikApp: App {
+    @State private var path: NavigationPath = .init()
+
     init() {
         // force to light mode
         UIView.appearance().overrideUserInterfaceStyle = .light
@@ -16,7 +22,19 @@ struct MounaikApp: App {
     
     var body: some Scene {
         WindowGroup {
-            PrepareView()
+            NavigationStack(path: $path) {
+                PrepareView(path: $path)
+                    .navigationDestination(for: AppScreen.self) { screen in
+                        switch screen {
+                        case .integrate:
+                            IntegrateView(path: $path)
+                        case .plan:
+                            PlanYourHikeView(path: $path)
+                        case .dashboard:
+                            DashboardView(path: $path)
+                        }
+                    }
+            }
         }
     }
 }

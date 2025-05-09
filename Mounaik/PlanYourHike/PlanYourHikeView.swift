@@ -6,13 +6,18 @@
 //
 
 import SwiftUI
+import HealthKit
 
 struct PlanYourHikeView: View {
+    @Binding var path: NavigationPath
+
     @State private var selectedDate: Date = Date()
     @State private var selectedMountain: Mountain?
     @State private var isShowMountainSheet = false
     @State private var isShowGuidelineSheet = false
-    private let currentVo2: Double = 30.0
+    @State private var isShowMountainError = false
+    @State private var isShowPredictionError = false
+    @State private var currentVo2: Double = 0
     private let calendar = Calendar.current
     
     func getVo2Mountain() -> Double {
@@ -70,6 +75,39 @@ struct PlanYourHikeView: View {
         return result
     }
     
+    func readVo2User() {
+        let healthStore = HKHealthStore()
+        let vo2Type = HKQuantityType.quantityType(forIdentifier: .vo2Max)!
+        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
+        
+        // query
+        let query = HKSampleQuery(sampleType: vo2Type, predicate: nil, limit: 1, sortDescriptors: [sortDescriptor]) { query, results, error in
+            if let result = results?.first as? HKQuantitySample {
+                let ml = HKUnit.literUnit(with: .milli)
+                let kg = HKUnit.gramUnit(with: .kilo)
+                let min = HKUnit.minute()
+                
+                currentVo2 = result.quantity.doubleValue(for: ml.unitDivided(by: kg).unitDivided(by: min))
+            }
+        }
+        
+        healthStore.execute(query)
+    }
+    
+    func doSave() {
+        guard getVo2Mountain() > 0 else {
+            isShowMountainError = true
+            return
+        }
+        
+        guard getVo2Prediction() > 0 else {
+            isShowPredictionError = true
+            return
+        }
+        
+        path.append(AppScreen.dashboard)
+    }
+    
     var mountainView: some View {
         var label = "-"
         let result = getVo2Mountain()
@@ -78,7 +116,7 @@ struct PlanYourHikeView: View {
             label = String(format: "%.1f ml/min/kg", result)
         }
         
-        return VStack(alignment: .leading, spacing: 30) {
+        return VStack(alignment: .leading, spacing: 10) {
             HStack{
                 Text("Mountain")
                 Spacer()
@@ -93,6 +131,13 @@ struct PlanYourHikeView: View {
                 Spacer()
                 
                 Text(label)
+            }
+            .padding(.top, 5)
+            
+            if isShowMountainError {
+                Text("Please select a mountain")
+                    .font(.caption)
+                    .foregroundStyle(.red)
             }
         }
         .padding()
@@ -109,14 +154,24 @@ struct PlanYourHikeView: View {
             label = String(format: "%.1f ml/min/kg", result)
         }
         
-        return VStack(alignment: .leading, spacing: 30) {
+        return VStack(alignment: .leading, spacing: 10) {
             DatePicker("Date to go", selection: $selectedDate, in: Date()..., displayedComponents: .date)
                 .datePickerStyle(.compact)
+                .onChange(of: selectedDate, { oldValue, newValue in
+                    isShowPredictionError = false
+                })
             
             HStack {
                 Text("Prediction of VO2Max")
                 Spacer()
                 Text(label)
+            }
+            .padding(.top, 10)
+            
+            if isShowPredictionError {
+                Text("Please select a date to go")
+                    .font(.caption)
+                    .foregroundStyle(.red)
             }
         }
         .padding()
@@ -129,8 +184,13 @@ struct PlanYourHikeView: View {
         let predictionVo2 = getVo2Prediction()
         let mountainVo2 = getVo2Mountain()
         
+        // validasi jika vo2max nya belum ada
+        if currentVo2 <= 0 {
+            return AnyView(AlertVo2NotAvailableView())
+        }
+        
         // validasi jika user belum pilih tanggal dan gunung
-        guard predictionVo2 > 0 && mountainVo2 > 0 else {
+        if predictionVo2 <= 0 && mountainVo2 <= 0 {
             return AnyView(EmptyView())
         }
         
@@ -167,7 +227,6 @@ struct PlanYourHikeView: View {
                 
                 predictionView
                 
-                
                 Spacer()
                 
                 VStack{
@@ -179,21 +238,27 @@ struct PlanYourHikeView: View {
                 .padding(.bottom)
                 .font(.caption)
                 
-                NavigationLink {
-                    DashboardView()
+                Button {
+                    doSave()
                 } label: {
                     Text("Save")
                         .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.bordered)
+                .disabled(currentVo2 <= 0)
             }
             .padding()
+        }
+        .onAppear {
+            readVo2User()
         }
         .navigationBarBackButtonHidden()
         .sheet(isPresented: $isShowMountainSheet) {
             NavigationStack {
                 MountainListView { mountain in
                     isShowMountainSheet = false
+                    isShowMountainError = false
+                    
                     selectedMountain = mountain
                 }
                 .navigationTitle("Indonesian Mountains")
@@ -240,5 +305,9 @@ struct PlanYourHikeView: View {
 }
 
 #Preview {
-    PlanYourHikeView()
+    @Previewable @State var path: NavigationPath = .init()
+
+    PlanYourHikeView(
+        path: $path
+    )
 }

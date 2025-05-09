@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct DashboardView: View {
-    init() {
+    @Binding var path: NavigationPath
+
+    func applyUiAppearance() {
         UITabBar.appearance().unselectedItemTintColor = .gray
         UITabBar.appearance().backgroundColor = UIColor(
             .gray.opacity(0.2)
@@ -17,23 +19,30 @@ struct DashboardView: View {
     
     var body: some View {
         TabView {
-            ExerciseTabView()
+            ExerciseTabView(path: $path)
                 .tabItem {
                     Label("Exercise", systemImage: "figure.run.circle")
                         .background(.white)
                 }
                 .navigationBarBackButtonHidden()
             
-            ScheduleView()
+            ScheduleView(path: $path)
                 .tabItem {
                     Label("Schedule", systemImage: "calendar.circle")
                 }
                 .navigationBarBackButtonHidden()
         }
         .navigationBarBackButtonHidden()
+        .onAppear {
+            applyUiAppearance()
+        }
     }
 }
 
 #Preview {
-    DashboardView()
+    @Previewable @State var path: NavigationPath = .init()
+
+    DashboardView(
+        path: $path
+    )
 }
