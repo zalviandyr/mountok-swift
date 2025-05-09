@@ -8,15 +8,7 @@
 import SwiftUI
 
 struct ExerciseTabView: View {
-    @State var sheetPresented = false
-    private let backgroundGradient = LinearGradient(
-        colors: [
-            Color("Colors/BgGradientStart"),
-            Color("Colors/BgGradientEnd")
-        ],
-        startPoint: .top,
-        endPoint: .bottom
-    )
+    @State var isShowVo2Presented = false
     var vO2Description: String {
         "This is a measurement of your VO, max, which is the maximum amount of oxygen your body can consume during exercise, Also called cardiorespiratory fitness, this is a useful measurement for everyone from the very fit to those managing illness.\n\nA higher VO2 max indicates a higher level of cardio fitness and endurance.\n\nMeasuring VO2 max requires a physical test and special equipment. You can also get an estimated VO2 max with heart rate and motion data from a fitness tracker. Apple Watch can record an estimated VO max when you do a brisk walk, hike, or run outdoors.\n\nVO2 max is validated for users 20 and older. Most people can improve their VO2 max with more intense and more frequent cardiovascular exercise. Certainconditions or medications that limit your heart rate may cause an overestimation of your VO, max. VO, max is not validated for pregnant users. You can indicate you're taking certain medications or add a current pregnancy in Health Details."
     }
@@ -85,7 +77,6 @@ struct ExerciseTabView: View {
                 Text("Today Activity")
                     .font(.title)
                     .fontWeight(.bold)
-                    .foregroundStyle(.white)
                 
                 HStack(alignment: .top) {
                     VStack(alignment: .leading, spacing: 0) {
@@ -118,12 +109,12 @@ struct ExerciseTabView: View {
                 .frame(height: 120)
                 .background(.white)
                 .cornerRadius(10)
+                .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 4)
                 
                 // next milestones
                 Text("Next Milestones")
                     .font(.title)
                     .fontWeight(.bold)
-                    .foregroundStyle(.white)
                 
                 HStack(spacing: 10) {
                     VStack(alignment: .leading, spacing: 0) {
@@ -155,6 +146,7 @@ struct ExerciseTabView: View {
                     .padding(.all, 10)
                     .background(.white)
                     .cornerRadius(10)
+                    .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 4)
                     
                     VStack(spacing: 10) {
                         VStack(alignment: .leading, spacing: 5) {
@@ -170,6 +162,7 @@ struct ExerciseTabView: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                         .background(.white)
                         .cornerRadius(10)
+                        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 4)
                         
                         VStack(alignment: .leading, spacing: 5) {
                             Text("Jogging")
@@ -184,13 +177,13 @@ struct ExerciseTabView: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                         .background(.white)
                         .cornerRadius(10)
+                        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 4)
                     }
                 }
                 .frame(height: 120)
                 
                 Text("You can change your target by hit the button below, to change the Mountain or Depart Date.")
                     .font(.caption)
-                    .foregroundStyle(.white)
                     .padding(.top)
                 
                 Button {
@@ -208,14 +201,13 @@ struct ExerciseTabView: View {
                     Text("Last sync of VO2Max is 29 April 2026 at 11.05 PM")
                     Button("learn more about VO2Max") {
                         // Aksi ketika diklik
-                        sheetPresented=true
+                        isShowVo2Presented=true
                     }
                     .foregroundColor(.blue)
                 }
                 .font(.caption)
-                .foregroundStyle(.white)
             }
-            .sheet(isPresented: $sheetPresented){
+            .sheet(isPresented: $isShowVo2Presented){
                 NavigationStack {
                     VStack {
                         Text(vO2Description)
@@ -228,7 +220,7 @@ struct ExerciseTabView: View {
                     .toolbar {
                         ToolbarItem(placement: .navigationBarLeading) {
                             Button("Back") {
-                                self.sheetPresented.toggle()
+                                self.isShowVo2Presented.toggle()
                             }
                         }
                     }
@@ -236,7 +228,6 @@ struct ExerciseTabView: View {
             }
             .padding()
         }
-        .background(backgroundGradient)
         
     }
 }
