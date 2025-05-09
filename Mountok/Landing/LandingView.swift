@@ -10,8 +10,8 @@ import SwiftUI
 struct LandingView: View {
     let backgroundGradient = LinearGradient(
         colors: [
-            Color("Colors/BackgroundGradientStart"),
-            Color("Colors/BackgroundGradientEnd")
+            Color("Colors/BgGradientStart"),
+            Color("Colors/BgGradientEnd")
         ],
         startPoint: .top,
         endPoint: .bottom

@@ -11,8 +11,8 @@ struct ExerciseTabView: View {
     @State var sheetPresented = false
     private let backgroundGradient = LinearGradient(
         colors: [
-            Color("Colors/BackgroundGradientStart"),
-            Color("Colors/BackgroundGradientEnd")
+            Color("Colors/BgGradientStart"),
+            Color("Colors/BgGradientEnd")
         ],
         startPoint: .top,
         endPoint: .bottom
@@ -24,6 +24,10 @@ struct ExerciseTabView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
+                // alert
+                AlertChangePlanView()
+                    .padding(.bottom)
+                
                 HStack {
                     VStack(alignment: .leading) {
                         Text("Mt. Prau")
@@ -66,7 +70,7 @@ struct ExerciseTabView: View {
                 }
                 .padding()
                 .foregroundStyle(.white)
-                .background(Color("Colors/BackgroundGradientEnd").opacity(0.4))
+                .background(Color("Colors/BgGradientEnd").opacity(0.4))
                 .background(
                     Image("Images/Prau")
                         .resizable()

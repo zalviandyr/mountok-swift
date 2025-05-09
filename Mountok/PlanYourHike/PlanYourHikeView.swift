@@ -8,28 +8,33 @@
 import SwiftUI
 
 struct SetYourTargetView: View {
-    @State private var text: String = ""
     @State private var selectedDate: Date = Date()
     @State private var selectedMountain: Mountain?
     @State private var isShowMountainSheet = false
     @State private var isShowGuidelineSheet = false
+    private let currentVo2: Double = 30.0
     private let calendar = Calendar.current
     
-    func getVo2Mountain() -> String {
+    func getVo2Mountain() -> Double {
         guard selectedMountain != nil else {
-            return "-"
+            return 0
         }
         
         let vo2Ref: Double = 30.0
         let minHeight: Double = 1500
         let height: Double = Double(selectedMountain!.elevation)
         let subtractHeight = height - minHeight
-    
-        let result = vo2Ref / 1 - 0.01 * (subtractHeight / 100)
         
-        return String(format: "%.1f ml/min/kg", result)
+        let decrease = 1 - 0.01 * (subtractHeight / 100)
+        let result = vo2Ref / decrease
+        
+        // factor medan sebesar 20%
+        let factor: Double = 0.2
+        let resultFactor: Double = result * factor
+        return result + resultFactor
     }
     
+    // convert selected date to week
     func getWeeks() -> Int {
         let oneMonthAhead = calendar.date(byAdding: .month, value: 1, to: Date())!
         let isMoreThanOneMonthAhead = selectedDate >= oneMonthAhead
@@ -49,12 +54,12 @@ struct SetYourTargetView: View {
         return weeks
     }
     
-    func getVo2Prediction() -> String {
+    func getVo2Prediction() -> Double {
         let isSameDay = calendar.isDate(selectedDate, inSameDayAs: Date())
         
         // validasi jika user belum memilih tanggal
         guard !isSameDay else {
-            return "-"
+            return 0
         }
         
         let weeks = getWeeks()
@@ -62,7 +67,82 @@ struct SetYourTargetView: View {
         // VO2Max meningkat 2.5% perminggu ketika melakukan HIT
         let r = 0.025
         let result = currentVo2 * (1 + r * Double(weeks))
-        return String(format: "%.1f ml/min/kg", result)
+        return result
+    }
+    
+    var mountainView: some View {
+        var label = "-"
+        let result = getVo2Mountain()
+        
+        if result > 0 {
+            label = String(format: "%.1f ml/min/kg", result)
+        }
+        
+        return VStack(alignment: .leading, spacing: 30) {
+            HStack{
+                Text("Mountain")
+                Spacer()
+                Button(selectedMountain == nil ? "Pick a mountain" : selectedMountain!.name ) {
+                    self.isShowMountainSheet.toggle()
+                }
+                .buttonStyle(.bordered)
+            }
+            
+            HStack {
+                Text("Mountain VO2Max")
+                Spacer()
+                
+                Text(label)
+            }
+        }
+        .padding()
+        .background(Color.white)
+        .cornerRadius(12)
+        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 4)
+    }
+    
+    var predictionView: some View {
+        var label = "-"
+        let result = getVo2Prediction()
+        
+        if result > 0 {
+            label = String(format: "%.1f ml/min/kg", result)
+        }
+        
+        return VStack(alignment: .leading, spacing: 30) {
+            DatePicker("Date to go", selection: $selectedDate, in: Date()..., displayedComponents: .date)
+                .datePickerStyle(.compact)
+            
+            HStack {
+                Text("Prediction of VO2Max")
+                Spacer()
+                Text(label)
+            }
+        }
+        .padding()
+        .background(Color.white)
+        .cornerRadius(12)
+        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 4)
+    }
+    
+    var alertView: some View {
+        let predictionVo2 = getVo2Prediction()
+        let mountainVo2 = getVo2Mountain()
+        
+        // validasi jika user belum pilih tanggal dan gunung
+        guard predictionVo2 > 0 && mountainVo2 > 0 else {
+            return AnyView(EmptyView())
+        }
+        
+        // validasi jika tanggal yang dipilih tidak cocok
+        if mountainVo2 >= predictionVo2 {
+            return AnyView(AlertVo2NotFeasibleView(
+                mountain: selectedMountain!,
+                vo2Needed: mountainVo2
+            ))
+        }
+        
+        return AnyView(EmptyView())
     }
     
     var body: some View {
@@ -74,48 +154,18 @@ struct SetYourTargetView: View {
                 
                 Spacer()
                 
+                alertView
+                
                 HStack {
                     Text("Current VO2Max")
                     Spacer()
-                    Text("30 ml/kg/min")
+                    Text(String(format: "%.1f ml/min/kg", currentVo2))
                 }
                 .padding()
                 
-                VStack(alignment: .leading, spacing: 30) {
-                    HStack{
-                        Text("Mountain")
-                        Spacer()
-                        Button(selectedMountain == nil ? "Pick a mountain" : selectedMountain!.name ) {
-                            self.isShowMountainSheet.toggle()
-                        }
-                        .buttonStyle(.bordered)
-                    }
-                    
-                    HStack {
-                        Text("Mountain VO2Max")
-                        Spacer()
-                        Text(getVo2Mountain())
-                    }
-                }
-                .padding()
-                .background(Color.white)
-                .cornerRadius(12)
-                .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 4)
+                mountainView
                 
-                VStack(alignment: .leading, spacing: 30) {
-                    DatePicker("Date to go", selection: $selectedDate, in: Date()..., displayedComponents: .date)
-                        .datePickerStyle(.compact)
-                    
-                    HStack {
-                        Text("Prediction of VO2Max")
-                        Spacer()
-                        Text(getVo2Prediction())
-                    }
-                }
-                .padding()
-                .background(Color.white)
-                .cornerRadius(12)
-                .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 4)
+                predictionView
                 
                 
                 Spacer()
