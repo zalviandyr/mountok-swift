@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct MountokApp: App {
+struct MounaikApp: App {
     init() {
         // force to light mode
         UIView.appearance().overrideUserInterfaceStyle = .light

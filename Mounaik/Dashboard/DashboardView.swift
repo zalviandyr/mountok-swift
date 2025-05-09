@@ -22,11 +22,13 @@ struct DashboardView: View {
                     Label("Exercise", systemImage: "figure.run.circle")
                         .background(.white)
                 }
+                .navigationBarBackButtonHidden()
             
             ScheduleView()
                 .tabItem {
                     Label("Schedule", systemImage: "calendar.circle")
                 }
+                .navigationBarBackButtonHidden()
         }
         .navigationBarBackButtonHidden()
     }
