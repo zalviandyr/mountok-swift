@@ -7,18 +7,6 @@
 
 import SwiftUI
 
-struct Mountain: Identifiable {
-    let id: UUID = UUID()
-    let name: String
-    let elevation: Int
-}
-
-struct Province: Identifiable {
-    let id: UUID = UUID()
-    let name: String
-    let mountains: Array<Mountain>
-}
-
 struct MountainListView: View {
     var onSelected: ((Mountain) -> Void)
     let datum: Array<Province> = [
