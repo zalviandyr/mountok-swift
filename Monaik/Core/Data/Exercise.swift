@@ -15,7 +15,7 @@ struct Exercise: Hashable, Codable {
     var id: String = UUID().uuidString
     let name: String
     let description: String
-    let duration: String
+    let duration: String?
     let icon: String
     let type: ExerciseType
     let timesAWeek: Int
@@ -69,7 +69,7 @@ struct Exercise: Hashable, Codable {
     static let enjoying: Exercise = Exercise(
         name: "Enjoying",
         description: "Just enjoying your day",
-        duration: "-",
+        duration: nil,
         icon: "bed.double.fill",
         type: ExerciseType.rest,
         timesAWeek: 1,

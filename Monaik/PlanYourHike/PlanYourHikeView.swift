@@ -42,9 +42,8 @@ struct PlanYourHikeView: View {
         
         do {
             // delete old person data
-            let persons = try modelContext.fetch(FetchDescriptor<PersonModel>())
-            
-            for person in persons {
+            let oldPersons = try modelContext.fetch(FetchDescriptor<PersonModel>())
+            for person in oldPersons {
                 modelContext.delete(person)
             }
             
@@ -65,7 +64,13 @@ struct PlanYourHikeView: View {
                 endDate: endDate
             )
             
-            // save workoute model
+            // delete old workout
+            let oldWorkouts = try modelContext.fetch(FetchDescriptor<ExerciseWeekModel>())
+            for workout in oldWorkouts {
+                modelContext.delete(workout)
+            }
+            
+            // save workout model
             for workout in workouts {
                 modelContext.insert(workout)
             }

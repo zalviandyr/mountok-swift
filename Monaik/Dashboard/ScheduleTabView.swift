@@ -12,7 +12,7 @@ struct ScheduleTabView: View {
     @Binding var path: NavigationPath
     
     @Query(sort: \ExerciseWeekModel.number)
-    var workouts: [ExerciseWeekModel]
+    private var workouts: [ExerciseWeekModel]
     
     var body: some View {
         NavigationView {
@@ -36,13 +36,9 @@ struct ScheduleTabView: View {
 #Preview {
     @Previewable @State var path: NavigationPath = .init()
     
-    let calendar = Calendar.current
-    let startDate = calendar.date(from: DateComponents(year: 2025, month: 5, day: 1))!
-    let endDate = calendar.date(from: DateComponents(year: 2025, month: 5, day: 30))!
-
     let config = ModelConfiguration(isStoredInMemoryOnly: true)
     let container = try! ModelContainer(for: ExerciseWeekModel.self, configurations: config)
-    let workouts = WorkoutPlannerUtil.generateWorkoutPlan(startDate: startDate, endDate: endDate)
+    let workouts = WorkoutPlannerUtil.generateDummy()
 
     // Tambahkan data dummy ke dalam container
     let context = container.mainContext

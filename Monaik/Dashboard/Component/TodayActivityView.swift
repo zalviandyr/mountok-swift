@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct TodayActivityView: View {
+    var exercise: Exercise
+    
     private let activity = Text("Outdoor Run")
         .fontWeight(.bold)
     
@@ -22,6 +24,7 @@ struct TodayActivityView: View {
                     Spacer()
                     
                     HStack {
+                        // TODO: save activity that related in apple watch
                         Text("Set \(activity) in your Apple Watch to do Exercise")
                             .font(.footnote)
                             .padding(.vertical, 5)
@@ -36,22 +39,24 @@ struct TodayActivityView: View {
                 
                 HStack(alignment: .top) {
                     VStack(alignment: .leading, spacing: 0) {
-                        Text("Jumping Rope")
+                        Text(exercise.name)
                             .font(.headline)
                             .padding(.bottom, 5)
                         
-                        HStack(spacing: 5) {
-                            Image(systemName: "timer")
-                                .resizable()
-                                .frame(width: 12, height: 12)
-                            
-                            Text("30 Minutes")
-                                .font(.caption)
+                        if exercise.duration != nil {
+                            HStack(spacing: 5) {
+                                Image(systemName: "timer")
+                                    .resizable()
+                                    .frame(width: 12, height: 12)
+                                
+                                Text(exercise.duration!)
+                                    .font(.caption)
+                            }
                         }
                         
                         Spacer()
                         
-                        Text("Is an effective workout that can increase your cardiorespiratory")
+                        Text(exercise.description)
                             .font(.footnote)
                     }
                     
@@ -72,5 +77,5 @@ struct TodayActivityView: View {
 }
 
 #Preview {
-    TodayActivityView()
+    TodayActivityView(exercise: Exercise.longHiit)
 }

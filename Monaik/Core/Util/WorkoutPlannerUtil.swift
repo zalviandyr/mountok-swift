@@ -52,6 +52,15 @@ class WorkoutPlannerUtil {
         return workoutWeeks
     }
     
+    static func generateDummy() -> [ExerciseWeekModel] {
+        let calendar = Calendar.current
+        let startDate = Date()
+//        let startDate = calendar.date(from: DateComponents(year: 2025, month: 5, day: 10))!
+        let endDate = calendar.date(from: DateComponents(year: 2025, month: 5, day: 30))!
+
+        return WorkoutPlannerUtil.generateWorkoutPlan(startDate: startDate, endDate: endDate)
+    }
+    
     private static func getActiveExercises(for weekNumber: Int) -> [Exercise] {
         return Exercise.allExercises.filter { exercise in
             let startValid = exercise.startWeek == nil || exercise.startWeek! <= weekNumber

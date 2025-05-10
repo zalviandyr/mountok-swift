@@ -11,9 +11,9 @@ struct ExerciseItemView: View {
     var exerciseDate: ExerciseDate
     
     private var label: String {
-        exerciseDate.exercise.type == .rest
+        exerciseDate.exercise.duration == nil
         ? "\(exerciseDate.exercise.name)"
-        : "\(exerciseDate.exercise.name) - \(exerciseDate.exercise.duration)"
+        : "\(exerciseDate.exercise.name) - \(exerciseDate.exercise.duration!)"
     }
     
     var body: some View {
