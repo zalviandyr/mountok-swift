@@ -24,11 +24,12 @@ struct InfoAboutVo2View: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Last sync of VO2Max is \(dateFormatter.string(from: lastSync))")
-            Button("learn more about VO2Max") {
-                isShowVo2Presented.toggle()
-            }
-            .foregroundColor(.blue)
+            Text("Last sync of VO2Max is \(lastSync.toDateAndTimeString)")
+            
+//            Button("learn more about VO2Max") {
+//                isShowVo2Presented.toggle()
+//            }
+//            .foregroundColor(.blue)
         }
         .font(.caption)
         .sheet(isPresented: $isShowVo2Presented){

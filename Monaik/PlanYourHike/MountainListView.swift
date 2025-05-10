@@ -77,7 +77,7 @@ struct MountainListView: View {
             ]
         ),
         Province(
-            name: "Middle Java",
+            name: "Central Java",
             mountains: [
                 Mountain(name: "Mt. Ungaran", elevation: 2050),
                 Mountain(name: "Mt. Telomoyo", elevation: 1894),
@@ -96,13 +96,13 @@ struct MountainListView: View {
             ]
         ),
         Province(
-            name: "East Kalimantan",
+            name: "East Borneo",
             mountains: [
                 Mountain(name: "Mt. Liangpran", elevation: 2240),
             ]
         ),
         Province(
-            name: "West Kalimantan",
+            name: "West Borneo",
             mountains: [
                 Mountain(name: "Mt. Niut", elevation: 1701),
                 Mountain(name: "Mt. Saran", elevation: 1758),
@@ -226,7 +226,6 @@ struct MountainListView: View {
         Province(
             name: "West Papua",
             mountains: [
-                Mountain(name: "Mt. Kwoka", elevation: 3000),
                 Mountain(name: "Mt. Umsini", elevation: 2950),
                 Mountain(name: "Mt. Wasada", elevation: 1070),
             ]

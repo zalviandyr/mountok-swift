@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Province: Codable {
+struct Province {
     let name: String
     let mountains: [Mountain]
 }

@@ -57,6 +57,19 @@ struct PlanYourHikeView: View {
                 departDate: selectedDate
             ))
             
+            // generate workout
+            let startDate = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
+            let endDate = selectedDate
+            let workouts = WorkoutPlannerUtil.generateWorkoutPlan(
+                startDate: startDate,
+                endDate: endDate
+            )
+            
+            // save workoute model
+            for workout in workouts {
+                modelContext.insert(workout)
+            }
+            
             path.append(AppScreen.dashboard)
         } catch {
             print(error)

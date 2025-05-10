@@ -60,6 +60,11 @@ struct ProjectionVo2View: View {
         return label
     }
     
+    var duration: Text {
+        Text("2 months")
+            .fontWeight(.bold)
+    }
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text("Date")
@@ -67,7 +72,7 @@ struct ProjectionVo2View: View {
                 .fontWeight(.bold)
                 .padding(.bottom, 5)
             
-            Text("The preparation usually takes 2 months to be followed as VO2Max growth is not instant")
+            Text("Recommended training duration at least \(duration), but adjustable based on your goals")
                 .font(.footnote)
             
             VStack(alignment: .leading, spacing: 10) {

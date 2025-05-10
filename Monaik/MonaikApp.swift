@@ -39,6 +39,6 @@ struct MonaikApp: App {
                     }
             }
         }
-        .modelContainer(for: [PersonModel.self])
+        .modelContainer(for: [PersonModel.self, ExerciseWeekModel.self])
     }
 }

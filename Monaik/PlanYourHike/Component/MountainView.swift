@@ -50,7 +50,7 @@ struct MountainView: View {
                 .fontWeight(.bold)
                 .padding(.bottom, 5)
             
-            Text("The list of mountain is limited to mountain that are less then 3000 mdpl and located in indonesia only")
+            Text("The list of mountain is limited to less then 3000 mdpl and located in Indonesia only")
                 .font(.footnote)
             
             VStack(alignment: .leading, spacing: 10) {
