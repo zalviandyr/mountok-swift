@@ -20,6 +20,9 @@ struct PlanYourHikeView: View {
     @State private var currentVo2: Double = 0
     private let calendar = Calendar.current
     
+    // set to false, to validate current vo2
+    private let debug = true
+    
     func getVo2Mountain() -> Double {
         guard selectedMountain != nil else {
             return 0
@@ -76,6 +79,11 @@ struct PlanYourHikeView: View {
     }
     
     func readVo2User() {
+        if debug {
+            currentVo2 = 35.0
+            return
+        }
+        
         let healthStore = HKHealthStore()
         let vo2Type = HKQuantityType.quantityType(forIdentifier: .vo2Max)!
         let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)

@@ -16,9 +16,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0BC818022DC9B6FF008EB9D6"
-               BuildableName = "Mounaik.app"
-               BlueprintName = "Mounaik"
-               ReferencedContainer = "container:Mounaik.xcodeproj">
+               BuildableName = "Monaik.app"
+               BlueprintName = "Monaik"
+               ReferencedContainer = "container:Monaik.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0BC818022DC9B6FF008EB9D6"
-            BuildableName = "Mounaik.app"
-            BlueprintName = "Mounaik"
-            ReferencedContainer = "container:Mounaik.xcodeproj">
+            BuildableName = "Monaik.app"
+            BlueprintName = "Monaik"
+            ReferencedContainer = "container:Monaik.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0BC818022DC9B6FF008EB9D6"
-            BuildableName = "Mounaik.app"
-            BlueprintName = "Mounaik"
-            ReferencedContainer = "container:Mounaik.xcodeproj">
+            BuildableName = "Monaik.app"
+            BlueprintName = "Monaik"
+            ReferencedContainer = "container:Monaik.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
