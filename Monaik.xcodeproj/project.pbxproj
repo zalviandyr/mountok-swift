@@ -258,8 +258,8 @@
 				DEVELOPMENT_TEAM = 7K56JA794V;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "Kami membutuhkan akses ke data VO₂Max Anda untuk menampilkan informasi kebugaran.";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Kami membutuhkan akses ke data VO₂Max Anda untuk menampilkan informasi kebugaran.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "We need access to your VO₂Max data to display fitness information";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "We need access to your VO₂Max data to display fitness information";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -291,8 +291,8 @@
 				DEVELOPMENT_TEAM = 7K56JA794V;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "Kami membutuhkan akses ke data VO₂Max Anda untuk menampilkan informasi kebugaran.";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Kami membutuhkan akses ke data VO₂Max Anda untuk menampilkan informasi kebugaran.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "We need access to your VO₂Max data to display fitness information";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "We need access to your VO₂Max data to display fitness information";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
