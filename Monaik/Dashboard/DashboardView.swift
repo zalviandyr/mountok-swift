@@ -26,7 +26,7 @@ struct DashboardView: View {
                 }
                 .navigationBarBackButtonHidden()
             
-            ScheduleView(path: $path)
+            ScheduleTabView(path: $path)
                 .tabItem {
                     Label("Schedule", systemImage: "calendar.circle")
                 }

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct AlertChangePlanView: View {
+    var person: PersonModel
+    
     var body: some View {
         HStack(spacing: 12) {
             Image(systemName: "exclamationmark.triangle.fill")
@@ -16,7 +18,7 @@ struct AlertChangePlanView: View {
                 .frame(width: 25, height: 25)
             
             VStack(alignment: .leading, spacing: 5) {
-                Text("Mt. Prau need VO2Max at 50 ml/min/kg")
+                Text("\(person.mountain.name) need VO2Max at \(person.mountainVo2.toFormattedVo2)")
                     .font(.footnote)
                     .fontWeight(.bold)
                 
@@ -33,5 +35,5 @@ struct AlertChangePlanView: View {
 }
 
 #Preview {
-    AlertChangePlanView()
+    AlertChangePlanView(person: PersonModel.empty())
 }

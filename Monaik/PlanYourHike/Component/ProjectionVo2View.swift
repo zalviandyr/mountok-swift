@@ -54,7 +54,7 @@ struct ProjectionVo2View: View {
         var label = "-"
         
         if projectionVo2 > 0 {
-            label = String(format: "%.1f ml/min/kg", projectionVo2)
+            label = projectionVo2.toFormattedVo2
         }
         
         return label

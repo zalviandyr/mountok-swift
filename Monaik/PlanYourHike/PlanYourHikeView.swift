@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
-import HealthKit
+import SwiftData
 
 struct PlanYourHikeView: View {
     @Binding var path: NavigationPath
-    
+    @Environment(\.modelContext) private var modelContext
+
     // mountain properties
     @State private var selectedMountain: Mountain?
     @State private var mountainVo2: Double = 0
@@ -28,30 +29,6 @@ struct PlanYourHikeView: View {
     // set to false, to validate current vo2
     private let debug = true
     
-    func readVo2User() {
-        if debug {
-            currentVo2 = 35.0
-            return
-        }
-        
-        let healthStore = HKHealthStore()
-        let vo2Type = HKQuantityType.quantityType(forIdentifier: .vo2Max)!
-        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
-        
-        // query
-        let query = HKSampleQuery(sampleType: vo2Type, predicate: nil, limit: 1, sortDescriptors: [sortDescriptor]) { query, results, error in
-            if let result = results?.first as? HKQuantitySample {
-                let ml = HKUnit.literUnit(with: .milli)
-                let kg = HKUnit.gramUnit(with: .kilo)
-                let min = HKUnit.minute()
-                
-                currentVo2 = result.quantity.doubleValue(for: ml.unitDivided(by: kg).unitDivided(by: min))
-            }
-        }
-        
-        healthStore.execute(query)
-    }
-    
     func doSave() {
         guard mountainVo2 > 0 else {
             isShowMountainError = true
@@ -63,7 +40,27 @@ struct PlanYourHikeView: View {
             return
         }
         
-        path.append(AppScreen.dashboard)
+        do {
+            // delete old person data
+            let persons = try modelContext.fetch(FetchDescriptor<PersonModel>())
+            
+            for person in persons {
+                modelContext.delete(person)
+            }
+            
+            // save person model
+            modelContext.insert(PersonModel(
+                baseVo2: currentVo2,
+                targetVo2: projectionVo2,
+                mountainVo2: mountainVo2,
+                mountain: selectedMountain!,
+                departDate: selectedDate
+            ))
+            
+            path.append(AppScreen.dashboard)
+        } catch {
+            print(error)
+        }
     }
     
     var alertView: some View {
@@ -129,7 +126,9 @@ struct PlanYourHikeView: View {
             .background(Color("Colors/BgScreen"))
         }
         .onAppear {
-            readVo2User()
+            HealthUtil.onReadVo2User { result, date in
+                currentVo2 = result
+            }
         }
         .navigationBarBackButtonHidden()
     }

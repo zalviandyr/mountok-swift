@@ -37,7 +37,7 @@ struct MountainView: View {
         var label = "-"
         
         if mountainVo2 > 0 {
-            label = String(format: "%.1f ml/min/kg", mountainVo2)
+            label = mountainVo2.toFormattedVo2
         }
         
         return label

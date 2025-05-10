@@ -12,8 +12,6 @@ struct AlertVo2NotFeasibleView: View {
     var vo2Needed: Double
     
     var body: some View {
-        let vo2Label = String(format: "%.1f ml/min/kg", vo2Needed)
-        
         VStack {
             HStack(spacing: 12) {
                 Image(systemName: "exclamationmark.triangle.fill")
@@ -22,7 +20,7 @@ struct AlertVo2NotFeasibleView: View {
                     .frame(width: 25, height: 25)
                 
                 VStack(alignment: .leading, spacing: 5) {
-                    Text("\(mountain.name) require VO2Max at \(vo2Label)")
+                    Text("\(mountain.name) require VO2Max at \(vo2Needed.toFormattedVo2)")
                         .font(.footnote)
                         .fontWeight(.bold)
                     

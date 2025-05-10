@@ -6,29 +6,9 @@
 //
 
 import SwiftUI
-import HealthKit
 
 struct IntegrateView: View {
     @Binding var path: NavigationPath
-
-    func requestPermission() {
-        let healthStore: HKHealthStore = .init()
-        let vo2Type = HKObjectType.quantityType(forIdentifier: .vo2Max)!
-        
-        guard HKHealthStore.isHealthDataAvailable() else {
-            print("Health data not available")
-            return
-        }
-        
-        // check permission
-        healthStore.requestAuthorization(toShare: [], read: [vo2Type]) { success, error in
-            if success {
-                path.append(AppScreen.plan)
-            } else {
-                // just do nothing
-            }
-        }
-    }
     
     var body: some View {
         NavigationView {
@@ -62,7 +42,11 @@ struct IntegrateView: View {
                             .padding([.leading, .bottom, .trailing])
                         
                         Button {
-                            requestPermission()
+                            HealthUtil.onRequestPermission { success in
+                                if success {
+                                    path.append(AppScreen.plan)
+                                }
+                            }
                         } label: {
                             HStack {
                                 Image(systemName: "applewatch")

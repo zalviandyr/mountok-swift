@@ -1,5 +1,5 @@
 //
-//  Mountain.swift
+//  Province.swift
 //  Monaik
 //
 //  Created by Zukron Alviandy on 10/05/25.
@@ -7,8 +7,7 @@
 
 import Foundation
 
-struct Mountain: Identifiable {
-    let id: UUID = UUID()
+struct Province: Codable {
     let name: String
-    let elevation: Int
+    let mountains: [Mountain]
 }
